@@ -105,7 +105,7 @@ export const HomePage: React.FC = () => {
           variant="h3"
           sx={{ color: "primary.main", fontWeight: "bold" }}
         >
-          Galactic Mission Control
+          Kanban Markdown
         </Typography>
         <Button
           variant="contained"

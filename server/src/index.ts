@@ -1,5 +1,6 @@
 import express from 'express';
-import bodyParser from 'body-parser';
+import https from 'https';
+import fs from 'fs';
 import { auth } from 'express-oauth2-jwt-bearer';
 import { ProjectService } from './services/ProjectService';
 import path from 'path';
@@ -10,8 +11,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(bodyParser.json());
-app.use(bodyParser.text()); // For raw markdown updates
+app.use(express.json());
+app.use(express.text()); // For raw markdown updates
 
 const authEnabled = !!process.env.AUTH0_DOMAIN;
 
@@ -246,7 +247,21 @@ const RESOURCES_DIR = process.env.RESOURCES_DIR
     ? path.resolve(process.cwd(), process.env.RESOURCES_DIR) 
     : path.resolve(__dirname, '../../resources');
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-    console.log(`Resources root expected at: ${RESOURCES_DIR}`);
-});
+const SSL_KEY = process.env.SSL_KEY_PATH || '/app/certs/key.pem';
+const SSL_CERT = process.env.SSL_CERT_PATH || '/app/certs/cert.pem';
+
+if (fs.existsSync(SSL_KEY) && fs.existsSync(SSL_CERT)) {
+    const httpsServer = https.createServer(
+        { key: fs.readFileSync(SSL_KEY), cert: fs.readFileSync(SSL_CERT) },
+        app
+    );
+    httpsServer.listen(PORT, () => {
+        console.log(`Server running on https://localhost:${PORT}`);
+        console.log(`Resources root expected at: ${RESOURCES_DIR}`);
+    });
+} else {
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+        console.log(`Resources root expected at: ${RESOURCES_DIR}`);
+    });
+}
