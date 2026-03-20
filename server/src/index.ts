@@ -1,5 +1,4 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import { auth } from 'express-oauth2-jwt-bearer';
 import { ProjectService } from './services/ProjectService';
 import path from 'path';
@@ -10,8 +9,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(bodyParser.json());
-app.use(bodyParser.text()); // For raw markdown updates
+app.use(express.json());
+app.use(express.text()); // For raw markdown updates
 
 const authEnabled = !!process.env.AUTH0_DOMAIN;
 
