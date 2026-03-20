@@ -1,0 +1,17 @@
+{
+  "name": "kaban-markdown-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:server": "pnpm -F server dev",
+    "dev:client": "pnpm -F client dev",
+    "build": "pnpm -r build && node -e \"const fs=require('fs');fs.cpSync('client/dist','server/public',{recursive:true})\"",
+    "start": "pnpm -F server start",
+    "docker:build": "docker build -t kaban-markdown .",
+    "docker:run": "docker run -p 3001:3001 -v ./resources:/app/resources kaban-markdown"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0"
+  },
+  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
+}

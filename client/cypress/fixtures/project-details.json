@@ -1,0 +1,32 @@
+{
+    "metadata": {
+        "id": "demo-project",
+        "name": "Demo Project",
+        "description": "A demo project for Galactic Mission Control",
+        "background_image": "https://example.com/bg.jpg"
+    },
+    "columns": [
+        {
+            "id": "todo",
+            "title": "To Do",
+            "raw": "# To Do\n\n## Task 1\n### Description\nFirst task\n",
+            "tasks": [
+                {
+                    "id": "task-1",
+                    "title": "Task 1",
+                    "content": "### Description\nFirst task",
+                    "raw": "## Task 1\n### Description\nFirst task",
+                    "metadata": {
+                        "description": "First task"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "ongoing",
+            "title": "On Going",
+            "raw": "# On Going",
+            "tasks": []
+        }
+    ]
+}

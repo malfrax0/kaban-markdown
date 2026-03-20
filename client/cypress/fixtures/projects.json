@@ -1,0 +1,8 @@
+[
+    {
+        "id": "demo-project",
+        "name": "Demo Project",
+        "description": "A demo project for Galactic Mission Control",
+        "background_image": "https://example.com/bg.jpg"
+    }
+]
