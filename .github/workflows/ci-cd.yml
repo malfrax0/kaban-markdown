@@ -76,6 +76,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Install Cypress binary
+        run: npx cypress install
+        working-directory: client
+
       - name: Cypress component tests
         uses: cypress-io/github-action@v6
         with:
@@ -101,6 +105,10 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Install Cypress binary
+        run: npx cypress install
+        working-directory: client
 
       - name: Cypress E2E tests
         uses: cypress-io/github-action@v6
